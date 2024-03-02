@@ -21,11 +21,23 @@ function App() {
   })
 
   const reset = () => {
-    console.log('reset')
+    setBreakTime(defaultBreakTime)
+    setSessionTime(defaultSessionTime)
+    setDisplayState({
+      time: sessionTime,
+      timeType: 'Session',
+      timerRunning: false,
+    })
+    const audio = document.getElementById('beep') as HTMLAudioElement
+    audio.pause()
+    audio.currentTime = 0
   }
 
   const startStop = (displayState: DisplayState) => {
-    console.log('startStop')
+    setDisplayState((prev) => ({
+      ...prev,
+      timerRunning: !prev.timerRunning,
+    }))
   }
 
   const changeBreakTime = (time: number) => {
@@ -46,6 +58,14 @@ function App() {
       timeType: 'Session',
       timerRunning: false,
     })
+  }
+
+  //when the timer runs, the time decrements
+  const decrementDisplay = () => {
+    setDisplayState((prev) => ({
+      ...prev,
+      time: prev.time - 1,
+    }))
   }
 
   return (
