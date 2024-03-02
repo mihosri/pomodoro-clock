@@ -28,6 +28,26 @@ function App() {
     console.log('startStop')
   }
 
+  const changeBreakTime = (time: number) => {
+    if (displayState.timerRunning) return
+    setBreakTime(time)
+    setDisplayState({
+      time: time,
+      timeType: 'Break',
+      timerRunning: false,
+    })
+  }
+
+  const changeSessionTime = (time: number) => {
+    if (displayState.timerRunning) return
+    setSessionTime(time)
+    setDisplayState({
+      time: time,
+      timeType: 'Session',
+      timerRunning: false,
+    })
+  }
+
   return (
     <div className="clock">
       <h1>Pomodoro Clock</h1>
@@ -36,7 +56,7 @@ function App() {
           <h4 id="break-label">Break Length</h4>
           <TimeSetter
             time={breakTime}
-            setTime={setBreakTime}
+            setTime={changeBreakTime}
             min={min}
             max={max}
             interval={interval}
@@ -48,7 +68,7 @@ function App() {
           <h4 id="session-label">session Length</h4>
           <TimeSetter
             time={sessionTime}
-            setTime={setSessionTime}
+            setTime={changeSessionTime}
             min={min}
             max={max}
             interval={interval}
