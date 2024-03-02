@@ -19,6 +19,14 @@ function App() {
   })
 
 
+  const reset = () => {
+    console.log("reset")
+  }
+
+  const startStop = (displayState: DisplayState) => {
+    console.log("startStop")
+  }
+
   return (
     <div className="clock">
       <h1>Pomodoro Clock</h1>
@@ -45,7 +53,11 @@ function App() {
             type="session" />
         </div>
       </div>
-      <Display />
+      <Display DisplayProps = {
+        displayState={displayState}
+        reset={reset}
+        startStop={startStop}
+      }/>
       <audio id="beep" src={AlarmSound}></audio>
       </div>
     </div>
