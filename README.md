@@ -17,11 +17,18 @@ npm run dev
 
 # Challenges and Success
 
--
+- This work was so challenging interms of setting the state back when the session or break ends. Also it involved a lot of functionalities. Separating into components and having functions for separate actions helped.
+
+# Future Improvements
+
+- Adding Doc
+- Fixing the loop between break and time session
+- Clean code
+- Pass all test cases
 
 # Learnings
 
-- fixed a bug by replacing the variable name from break (keyword) to breakTime
--
+- Fixed a bug by replacing the variable name from break (keyword) to breakTime
+- Handling time
 
 # Deployed App Link

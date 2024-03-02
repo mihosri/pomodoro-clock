@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { DisplayState, formatTime } from './helpers'
 import alarmSound from './assets/alarmSound.mp3'
@@ -19,6 +19,30 @@ function App() {
     timeType: 'Session',
     timerRunning: false,
   })
+
+  //useEffect hook - when the timer starts, for every 1 sec call the decdisplay func to update
+  useEffect(() => {
+    let timerID: number
+    if (!displayState.timerRunning) return
+
+    if (displayState.timerRunning) {
+      timerID = window.setInterval(decrementDisplay, 1000)
+    }
+  }, [displayState.timerRunning])
+
+  //this one is to handle the audio
+  useEffect(() => {
+    if (displayState.time === 0) {
+      const audio = document.getElementById('beep') as HTMLAudioElement
+      audio.currentTime = 1
+      audio.play().catch((err) => console.log(err))
+      setDisplayState((prev) => ({
+        ...prev,
+        time: prev.timeType === 'Session' ? breakTime : sessionTime,
+        timeType: prev.timeType === 'Session' ? 'Break' : 'Session',
+      }))
+    }
+  }, [displayState, breakTime, sessionTime])
 
   const reset = () => {
     setBreakTime(defaultBreakTime)
