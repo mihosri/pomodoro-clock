@@ -24,3 +24,17 @@ button {
   color: aliceblue;
   border-radius: 5px;
 }
+
+h4 {
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+span {
+  font-size: 24px;
+}
+
+.display {
+  text-align: center;
+  margin-top: 20px;
+}
