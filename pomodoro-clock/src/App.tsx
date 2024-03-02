@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import { DisplayState, formatTime } from './helpers'
+import { DisplayState } from './helpers'
 import alarmSound from './assets/alarmSound.mp3'
 import Display from './Display'
 import TimeSetter from './TimeSetter'
@@ -27,6 +27,10 @@ function App() {
 
     if (displayState.timerRunning) {
       timerID = window.setInterval(decrementDisplay, 1000)
+    }
+
+    return () => {
+      window.clearInterval(timerID)
     }
   }, [displayState.timerRunning])
 
@@ -57,7 +61,7 @@ function App() {
     audio.currentTime = 0
   }
 
-  const startStop = (displayState: DisplayState) => {
+  const startStop = () => {
     setDisplayState((prev) => ({
       ...prev,
       timerRunning: !prev.timerRunning,
