@@ -1,30 +1,31 @@
 import { useState } from 'react'
 import './App.css'
 import { DisplayState, formatTime } from './helpers'
+import alarmSound from './assets/alarmSound.mp3'
+import Display from './Display'
+import TimeSetter from './TimeSetter'
 
-
-const defaultBreakTime = 5 * 60;
-const defaultSessionTime = 25 * 60;
-const min = 60; //60secs
-const max = 60 * 60; //1 hour
-const interval = 60; //1 min up or down
+const defaultBreakTime = 5 * 60
+const defaultSessionTime = 25 * 60
+const min = 60 //60secs
+const max = 60 * 60 //1 hour
+const interval = 60 //1 min up or down
 
 function App() {
   const [breakTime, setBreakTime] = useState(defaultBreakTime)
   const [sessionTime, setSessionTime] = useState(defaultSessionTime)
-  const[displayState, setDisplayState] = useState<DisplayState>({
+  const [displayState, setDisplayState] = useState<DisplayState>({
     time: sessionTime,
-    timeType: "Session",
-    timerRunning: false
+    timeType: 'Session',
+    timerRunning: false,
   })
 
-
   const reset = () => {
-    console.log("reset")
+    console.log('reset')
   }
 
   const startStop = (displayState: DisplayState) => {
-    console.log("startStop")
+    console.log('startStop')
   }
 
   return (
@@ -33,7 +34,7 @@ function App() {
       <div className="setters">
         <div className="break">
           <h4 id="break-label">Break Length</h4>
-          <TimeSetter 
+          <TimeSetter
             time={breakTime}
             setTime={setBreakTime}
             min={min}
@@ -45,21 +46,22 @@ function App() {
 
         <div className="session">
           <h4 id="session-label">session Length</h4>
-          <TimeSetter time={sessionTime}
+          <TimeSetter
+            time={sessionTime}
             setTime={setSessionTime}
             min={min}
             max={max}
             interval={interval}
-            type="session" />
+            type="session"
+          />
         </div>
       </div>
-      <Display DisplayProps = {
+      <Display
         displayState={displayState}
         reset={reset}
         startStop={startStop}
-      }/>
-      <audio id="beep" src={AlarmSound}></audio>
-      </div>
+      />
+      <audio id="beep" src={alarmSound}></audio>
     </div>
   )
 }
